@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // Array.from:将一个可迭代对象转换为数组并将其返回
+        // 第一个参数 目标迭代对象 第二个参数map函数(作用同map) 第三个参数map回调使用的this对象
+
+        // 使用Array.from直接返回的数组，基本数据类型是拷贝了一份，不会被影响。
+        // 但是数组内部的引用数据类型是浅拷贝，也就是拷贝下来的仍然是一个指针，而非在堆栈上创建一个新数组
+        // 当对其进行更改时会影响到另一个对象的数据元素
+        // console.log('--------我是一条分割线:浅拷贝第一次打印---------');
+        // let arr1 = [1, [2, 3], [4, 5]];
+        // let newArr1 = Array.from(arr1);
+        // console.log(arr1);
+        // console.log(newArr1);
+        // // 避免因为console.log打印的异步特性导致打印成同一个模样
+        // setTimeout(() => {
+        //     console.log('--------我是一条分割线:浅拷贝第二次打印---------');
+        //     // 进行操作
+        //     arr1.push(6);
+        //     arr1[1].push(4);
+        //     newArr1.push(0);
+        //     newArr1[2].push(9);
+        //     // 打印更改后的数据检测是否是深拷贝
+        //     console.log(arr1);
+        //     console.log(newArr1);
+        // }, 500)
+
+
+        console.log('--------我是一条分割线：深拷贝第一次打印---------');
+        // 如何使用Array.from实现一个深拷贝?
+        function deepClone(val) {
+            return Array.isArray(val) ? Array.from(val, deepClone) : val
+        }
+        let arr = [1, [2, 3], [4, 5]];
+        let newArr = Array.from(arr, deepClone);
+        console.log(arr);
+        console.log(newArr);
+        // 避免因为console.log打印的异步特性导致打印成同一个模样
+        setTimeout(() => {
+            console.log('--------我是一条分割线：深拷贝第二次打印---------');
+            // 进行操作
+            arr.push(6);
+            arr[1].push(4);
+            newArr.push(0);
+            newArr[2].push(9);
+            // 打印更改后的数据检测是否是深拷贝
+            console.log(arr);
+            console.log(newArr);
+        }, 1000)
+
+    </script>
+</body>
+
+</html>

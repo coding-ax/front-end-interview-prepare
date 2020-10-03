@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // typeof 一元运算符 返回一个字符串类型
+        console.log(typeof undefined); //undefined
+        console.log(typeof {}); //object
+        console.log(typeof null); //object
+        console.log(typeof 1); // number
+        console.log(typeof "str"); // string
+        console.log(typeof []); // object
+        console.log(typeof Symbol()); //symbol
+        console.log(typeof BigInt(222222)); //bigint
+        // 为什么typeof null == "object":因为在底层 null和object在底层二进制表示的时候
+        // 开头都是000 而typeof检测原理就是检测其底层存储，导致了这个bug 
+
+        // 而instance
+        console.log();
+
+    </script>
+</body>
+
+</html>
