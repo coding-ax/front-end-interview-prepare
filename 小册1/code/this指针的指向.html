@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 1.直接调用的情况下this指向window
+        console.log("情况一：this指向window")
+        console.log(this);//window
+        // 用var 会将name挂载到window
+        var name = 'window\'s name'
+        // 2.直接调用一个可以直接调用的函数，this指向window
+        function print() {
+            console.log(this)
+            console.log(this.name);
+        }
+        console.log("情况二：函数中直接调用：this指向window，实质上就是指情况一")
+        print();
+
+        console.log("情况三：通过new运算符初始化一个实例，this指向该实例")
+        // 3.通过new运算符，new一个对象后再调用
+        let pri = new print();
+
+        console.log("情况四：通过创建一个对象，然后通过对象进行调用，this指向该对象（谁调用，指向谁）")
+        // 4.对象中使用，this指向该对象（谁调用，指向谁）
+        let obj = {
+            age: 18,
+            name: 'ax',
+            print: print
+        }
+        obj.print();
+
+        // 5.箭头函数 箭头函数中没有this，this指向的是上下文的this
+        console.log('情况五：箭头函数中调用this，this指向');
+        let obj2 = {
+            print:()=>{
+                console.log(this);
+            }
+        }
+        obj2.print();
+
+    </script>
+</body>
+
+</html>
