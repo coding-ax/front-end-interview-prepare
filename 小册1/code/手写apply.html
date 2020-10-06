@@ -25,17 +25,16 @@
             // 挂载函数
             context.fn = this;
             let result = context.fn(...args);
+            delete context.fn;
             return result;
         }
         let obj = {
             name: "ax"
         }
         function print(...args) {
-            console.log(this);
-            console.log(...args)
             console.log(this.name);
         }
-        print.myApply(obj, "爬", "尹可汗渣男 爬");
+        print.myApply(obj, "ok", "test");
 
     </script>
 </body>
