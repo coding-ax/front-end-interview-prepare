@@ -21,9 +21,14 @@
         // 为什么typeof null == "object":因为在底层 null和object在底层二进制表示的时候
         // 开头都是000 而typeof检测原理就是检测其底层存储，导致了这个bug 
 
-        // 而instance
-        console.log();
+        // 而instanceof的原理是根据原型链去寻找是否拥有相同的原型
+        console.log([] instanceof Array); //true
 
+        // 基本类型不能使用instanceof
+        console.log('string' instanceof String); //false 
+
+        console.log({} instanceof Object); //true
+        console.log(new Date() instanceof Object); //true
     </script>
 </body>
 
