@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 1. 原型继承
+        // 核心思想：将父类的实例作为子类的原型
+        // 优点：方法复用
+        let person = {
+            friend: ["ax", "zkm", "ykh"]
+        }
+
+        // 版本2 使用Object.create 因为Object.create方法第一个参数
+        // // 通过原型继承(Object.create(原型))
+        // let p1 = Object.create(person);
+        // let p2 = Object.create(person);
+        // console.log(p1.friend); //["ax", "zkm", "ykh"]
+        // console.log(p2.friend); // ["ax", "zkm", "ykh"]
+        // // 缺点：会共享引用属性 子类无法传参
+        // // 避免console.log进行异步打印(setInterval)
+        // setTimeout(() => {
+        //     p1.friend.push("hw");
+        //     console.log(p2.friend); //["ax", "zkm", "ykh", "hw"]
+        // }, 50);
+
+
+        // 2. 组合继承
+        // 定义父类构造函数
+        function Father(name) {
+            this.name = name;
+            this.friend = ["ax", "zkm", "ykh"];
+        }
+        // 将方法定义在原型对象上，其属性就会被共享
+        Father.prototype.hello = function () {
+            console.log(`Hello!,I am ${this.name}`);
+        }
+
+        // 定义子类
+        function Son(name, age) {
+            // (重点)在这里必须调用父类的构造方法，并将其构造函数的this指向当前
+            Father.call(this, name);
+            // 定义子类自己的属性和方法
+            this.age = age;
+            console.log(`And I am ${this.age} years old`);
+        }
+        // js的继承实际上是基于原型链完成的，
+        // 也就是说子类的构造函数的prototype属性必须指向父类的实例
+        // 而子类的
+
+    </script>
+</body>
+
+</html>
