@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button onclick="bindClick('防抖')">防抖</button>
+    <button onclick="bindClick2('节流')">节流</button>
+    <script>
+        // 防抖: 一个函数 在设置的时间后执行 如果在设置的时间间隔期间再次触发 那么本次就无效 重新计算
+        // 触发高频时间后n秒内只会执行一次 如果n秒高频时间内再次触发 则会重新计算时间
+        // 原理 debounce 触发后 首先清除掉timeout（释放 指向空） 然后返回节流数组 利用闭包保存timeout变量 
+        const debounce = (fn, time) => {
+            // 利用闭包避免全局污染
+            let timeout = null;
+            return function () {
+                if (timeout) {
+                    // 在定时期间，那么清除原来计时器 重新计时(核心)
+                    clearTimeout(timeout);
+                }                    
+                 // 设置定时器
+                timeout = setTimeout(() => {
+                    // 执行函数
+                    fn.apply(this, arguments)
+                }, time);
+            }
+        }
+        function clickButton(type) {
+            console.log(type)
+        }
+
+        const bindClick = debounce(clickButton, 1000);
+
+        // 节流 ：重新触发不影响 原计时器 
+        const throttle = (fn, time) => {
+            // 利用闭包 保存当前激活状态
+            let status = false;
+            return function () {
+                if (status) {
+                    return;
+                }
+                else {
+                    status = true;
+                    setTimeout(() => {
+                        fn.apply(this, arguments);
+                        // 重置status
+                        status = false;
+                    }, time);
+                }
+            }
+        }
+        const bindClick2 = throttle(clickButton, 1000);
+    </script>
+</body>
+
+</html>

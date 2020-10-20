@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    console.log(1);
+    // 宏任务
+    setTimeout(() => {
+        console.log(2);
+    }, 0);
+    // 微任务
+    new Promise(res=>{
+        console.log(3);
+        res();
+        console.log(4);
+    }).then(res=>{
+        console.log(5);
+    })
+    console.log(6);
+
+    // // 理解2
+    // setTimeout(() => {
+    //     alert(1)
+    // }, 0);
+    // // 直接卡死不渲染
+    // while(true){}
+</script>
+
+</html>
