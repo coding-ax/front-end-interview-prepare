@@ -12,7 +12,7 @@
 
 ## 1.手写call
 
-改变this的核心思想在于：谁调用函数，this指向谁。
+**改变this的核心思想**在于：**谁调用函数，this指向谁。**
 
 所以我们需要为传入的对象绑定上一个fn属性，这个fn属性指向要执行的函数。
 
@@ -22,7 +22,7 @@
  // 手写一个call
         Function.prototype.myCall = function (context) {
             if (typeof this !== "function") {
-                throw new TypeError("this isn't function");
+                throw new TypeError("this isn't a function");
             }
             // 如果context为空 就默认指向window
             context = context || window;
@@ -87,8 +87,6 @@ apply和call的区别就在于参数的处理：
         }
         print.myApply(obj, "ok", "test");
 ```
-
-结果：
 
 
 
