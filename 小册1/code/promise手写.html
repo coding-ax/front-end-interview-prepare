@@ -59,7 +59,6 @@
                     that.state = RESOLVE;
                     that.value = value;
                     // 依次执行所有的回调函数
-                    console.log('pending -> resolve');
                     that.resolveCallBack.map(cb => cb(that.value))
                 }
             }
@@ -75,13 +74,12 @@
             } catch (error) {
                 reject(error);
             }
-        }
-        let i = 1;
+        };
         MyPromise.prototype.then = function (onResolve, onReject) {
             let that = this;
             // 判断传入值是否为函数 不是就创建成函数 
-            onReject = typeof onReject==="function"?onReject:v=>{throw(v)};
-            onResolve = typeof onResolve==="function"?onResolve:v=>v;
+            onReject = typeof onReject === "function" ? onReject : v => { throw (v) };
+            onResolve = typeof onResolve === "function" ? onResolve : v => v;
             // 如果处在pending then里的方法都需要加到resolve
             if (that.state === PENDING) {
                 console.log('pending push');
@@ -89,19 +87,19 @@
                 that.rejectCallBack.push(onReject);
             }
             //  立即执行
-            if(that.state===RESOLVE){
+            if (that.state === RESOLVE) {
                 onResolve(that.value);
             }
-            if(that.state===REJECT){
-                onResolve(that.value);
+            if (that.state === REJECT) {
+                onReject(that.value);
             }
         }
-        
-        new MyPromise((res,rej)=>{
+
+        new MyPromise((res, rej) => {
             setTimeout(() => {
                 res("test")
             }, 1000);
-        }).then(res=>{
+        }).then(res => {
             console.log(res)
         })
     </script>
