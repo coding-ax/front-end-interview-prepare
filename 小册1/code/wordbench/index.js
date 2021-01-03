@@ -1,4 +1,4 @@
-// 编写快速排序
+
 /**
  *
  * 10行代码实现快排
@@ -21,6 +21,7 @@ const quickSort = (arr) => {
     // 递归调用并且将其拼接
     return quickSort(left).concat([middle], quickSort(right))
 }
-// 测试
-let userCase = [1, 4, 2, 5, 1, 5,24,43,0,-23,1];
-console.log(quickSort(userCase));
+
+module.exports={
+    quickSort
+}
