@@ -48,7 +48,7 @@ class MyPromise {
         }
     }
     // 做到能链式调用
-    then(resolveCallBack, rejectCallBack) {
+    then(   resolveCallBack, rejectCallBack) {
         // 确保传入为函数
         typeof resolveCallBack === 'function' ? null : resolveCallBack = value => value;
         typeof rejectCallBack === 'function' ? null : rejectCallBack = result => {
